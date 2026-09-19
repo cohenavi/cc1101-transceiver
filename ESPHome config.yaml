@@ -2,27 +2,25 @@ esphome:
   name: cc1101-transceiver
   friendly_name: CC1101 RF Transceiver
 
-esp32:
-  board: esp32dev
-  framework:
-    type: arduino
+esp8266:
+  board: d1_mini
 
-wifi: 
-  ssid:  !secret wifi_ssid
-  password: !secret wifi_password
+
+wifi:
+  ssid: WIFI SSID
+  password: "WIFI PASS"
   
 logger:
 
 api:
   encryption:
-    key: ""
-
-ota:
-  - platform: esphome
-    password: ""
+    key: ***
 
 web_server:
   port: 80
+
+ota:
+  - platform: esphome
 
 # Globals to store learned signals
 globals:
@@ -38,14 +36,14 @@ globals:
 
 # SPI Bus
 spi:
-  clk_pin: GPIO18
-  mosi_pin: GPIO23
-  miso_pin: GPIO19
+  clk_pin: GPIO14  # D5
+  mosi_pin: GPIO13 # D7
+  miso_pin: GPIO12 # D6
 
 # CC1101 - Dual Pin Mode
 cc1101:
   id: cc1101_module
-  cs_pin: GPIO5
+  cs_pin: GPIO15 # D8
   frequency: 433.92MHz
   output_power: 10
   modulation_type: ASK/OOK
@@ -55,7 +53,7 @@ cc1101:
 # Remote Receiver - connected to GDO2
 remote_receiver:
   id: rf_receiver
-  pin: GPIO2
+  pin: GPIO4 # D2
   tolerance: 50%
   filter: 200us
   dump:
@@ -102,7 +100,7 @@ remote_receiver:
 # Remote Transmitter - connected to GDO0
 remote_transmitter:
   id: rf_transmitter
-  pin: GPIO4
+  pin: GPIO5 #D1
   carrier_duty_percent: 100%
   on_transmit:
     then:
