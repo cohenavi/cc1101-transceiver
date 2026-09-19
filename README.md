@@ -35,34 +35,20 @@ Learn and replay 433 MHz RF signals from remotes, blinds, outlets, and more — 
 
 Uses separate pins for TX and RX — no mode switching needed.
 
-```
- ESP32-WROOM                CC1101 Module
- ┌──────────┐              ┌──────────────┐
- │          │              │              │
- │     3V3  ├──── Red ─────┤ VCC          │
- │     GND  ├──── Black ───┤ GND          │
- │          │              │              │
- │  GPIO23  ├──── Orange ──┤ MOSI (SI)    │
- │  GPIO19  ├──── Yellow ──┤ MISO (SO)    │
- │  GPIO18  ├──── Green ───┤ SCK (SCLK)   │
- │   GPIO5  ├──── Purple ──┤ CSN (CS)     │
- │          │              │              │
- │   GPIO4  ├──── Blue ────┤ GDO0 (TX)    │
- │   GPIO2  ├──── Cyan ────┤ GDO2 (RX)    │
- │          │              │              │
- └──────────┘              └──────────────┘
-```
+### 🔌 Hardware Wiring (D1 Mini to CC1101)
 
-| Wire   | D1 Pin      | CC1101 Pin | Function            |
-| ------ | ----------- | ---------- | ------------------- |
-| Red    | 3V3         | VCC (C2)   | Power (3.3V only!)  |
-| White  | GND         | GND (C1)   | Ground              |
-| Blue   | IO 14 (D5)  | MOSI (C6)  | SPI Data Out        |
-| Gray   | IO 5 (D1)   | MISO (C7)  | SPI Data In         |
-| Green  | IO 13 (D7)  | SCK (C5)   | SPI Clock           |
-| Black  | IO 4 (D2)   | CSN (C4)   | SPI Chip Select     |
-| Orange | IO 15 (D8)  | GDO0 (C3)  | TX Data             |
-| Yellow | IO 12 (D6)  | GDO2       | RX Data             |
+This pinout is specifically designed to use the ESP8266's dedicated **Hardware SPI** bus for fast, reliable communication while strictly avoiding pins that cause boot-loop crashes when pulled high or low during startup.
+
+| Wire Color | D1 Mini Pin | GPIO | CC1101 Pin | Function | Notes |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Red** | `3V3` | — | **VCC** (C2) | Power | ⚠️ **3.3V ONLY!** Do not use 5V. |
+| **White** | `GND` | — | **GND** (C1) | Ground | |
+| **Green** | `D5` | GPIO 14 | **SCK** (C5) | SPI Clock | Hardware SPI bus. |
+| **Gray** | `D6` | GPIO 12 | **MISO** (C7) | SPI Data In | Hardware SPI bus. |
+| **Blue** | `D7` | GPIO 13 | **MOSI** (C6)| SPI Data Out | Hardware SPI bus. |
+| **Black** | `D8` | GPIO 15 | **CSN** (C4) | SPI Chip Select | Standard CSN. Pulled LOW at boot (safe). |
+| **Orange**| `D1` | GPIO 5 | **GDO0** (C3)| TX Data | Safe I/O. Prevents boot-strapping crashes. |
+| **Yellow**| `D2` | GPIO 4 | **GDO2** | RX Data | Safe I/O. |
 
 > ⚠️ The CC1101 is a **3.3V device**. Do not connect to 5V — it will damage the module.
 
