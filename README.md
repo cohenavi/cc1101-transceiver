@@ -39,16 +39,16 @@ Uses separate pins for TX and RX — no mode switching needed.
 
 This pinout is specifically designed to use the ESP8266's dedicated **Hardware SPI** bus for fast, reliable communication while strictly avoiding pins that cause boot-loop crashes when pulled high or low during startup.
 
-| Wire Color | D1 Mini Pin | GPIO | CC1101 Pin | Function | Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Red** | `3V3` | — | **VCC** (C2) | Power | ⚠️ **3.3V ONLY!** Do not use 5V. |
-| **White** | `GND` | — | **GND** (C1) | Ground | |
-| **Green** | `D5` | GPIO 14 | **SCK** (C5) | SPI Clock | Hardware SPI bus. |
-| **Gray** | `D6` | GPIO 12 | **MISO** (C7) | SPI Data In | Hardware SPI bus. |
-| **Blue** | `D7` | GPIO 13 | **MOSI** (C6)| SPI Data Out | Hardware SPI bus. |
-| **Black** | `D8` | GPIO 15 | **CSN** (C4) | SPI Chip Select | Standard CSN. Pulled LOW at boot (safe). |
-| **Orange**| `D1` | GPIO 5 | **GDO0** (C3)| TX Data | Safe I/O. Prevents boot-strapping crashes. |
-| **Yellow**| `D2` | GPIO 4 | **GDO2** | RX Data | Safe I/O. |
+| Wire Color | CC1101 Pin | D1 Mini Pin | GPIO | Function |
+| :--- | :--- | :--- | :--- | :--- |
+| **White** | **1 (GND)** | **GND** | — | Ground |
+| **Red** | **2 (VCC)** | **3V3** | — | Power (3.3V) |
+| **Black** | **3 (GDO0)** | **D1** | GPIO 5 | TX Data |
+| **Orange** | **4 (CSN)** | **D8** | GPIO 15 | SPI Chip Select |
+| **Blue** | **5 (SCK)** | **D5** | GPIO 14 | SPI Clock |
+| **Green** | **6 (MOSI)** | **D7** | GPIO 13 | SPI Data Out |
+| **Yellow** | **7 (MISO/GDO1)**| **D6** | GPIO 12 | SPI Data In |
+| **Gray** | **8 (GDO2)** | **D2** | GPIO 4 | RX Data |
 
 > ⚠️ The CC1101 is a **3.3V device**. Do not connect to 5V — it will damage the module.
 
