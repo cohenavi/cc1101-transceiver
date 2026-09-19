@@ -53,16 +53,16 @@ Uses separate pins for TX and RX — no mode switching needed.
  └──────────┘              └──────────────┘
 ```
 
-| Wire | ESP32 Pin | CC1101 Pin | Function |
-|------|-----------|------------|----------|
-| Red | 3V3 | VCC | Power (3.3V only!) |
-| Black | GND | GND | Ground |
-| Orange | GPIO23 | MOSI | SPI Data Out |
-| Yellow | GPIO19 | MISO | SPI Data In |
-| Green | GPIO18 | SCK | SPI Clock |
-| Purple | GPIO5 | CSN | SPI Chip Select |
-| Blue | GPIO4 | GDO0 | TX Data |
-| Cyan | GPIO2 | GDO2 | RX Data |
+| Wire   | D1 Pin      | CC1101 Pin | Function            |
+| ------ | ----------- | ---------- | ------------------- |
+| Red    | 3V3         | VCC (C2)   | Power (3.3V only!)  |
+| White  | GND         | GND (C1)   | Ground              |
+| Blue   | IO 14 (D5)  | MOSI (C6)  | SPI Data Out        |
+| Gray   | IO 5 (D1)   | MISO (C7)  | SPI Data In         |
+| Green  | IO 13 (D7)  | SCK (C5)   | SPI Clock           |
+| Black  | IO 4 (D2)   | CSN (C4)   | SPI Chip Select     |
+| Orange | IO 15 (D8)  | GDO0 (C3)  | TX Data             |
+| Yellow | IO 12 (D6)  | GDO2       | RX Data             |
 
 > ⚠️ The CC1101 is a **3.3V device**. Do not connect to 5V — it will damage the module.
 
